@@ -18,6 +18,7 @@ from django.urls import path
 from django.urls import include, path
 from rest_framework import routers
 from Accounts.views import UserCreateAPIView
+from rest_framework.authtoken import views
 
 router = routers.DefaultRouter()
 router.register(r'register', UserCreateAPIView)
@@ -25,9 +26,10 @@ router.register(r'register', UserCreateAPIView)
 
 urlpatterns = [
     path('api/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('people/', include('People.urls')),
     path('admin/', admin.site.urls),
+    path('api-token-auth/',views.obtain_auth_token,name='api-token-auth'),
     #path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     #path('api/', include('Accounts.urls')),
 ]
